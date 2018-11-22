@@ -27,6 +27,12 @@ namespace detail {
 template <typename bound_args>
 struct extract_capacity
 {
+private:
+    typedef typename boost::mpl::has_key<bound_args, tag::capacity>::type _has_capacity;
+
+public:
+    static const bool has_capacity = _has_capacity::value;
+
     typedef typename boost::mpl::eval_if<
         typename boost::mpl::has_key<bound_args, tag::capacity>::type
       , boost::parameter::binding<bound_args, tag::capacity>
@@ -40,6 +46,12 @@ struct extract_capacity
 template <typename bound_args, typename T>
 struct extract_allocator
 {
+private:
+    typedef typename boost::mpl::has_key<bound_args, tag::allocator>::type _has_allocator;
+
+public:
+    static const bool has_allocator = _has_allocator::value;
+
     typedef typename boost::mpl::eval_if<
         typename boost::mpl::has_key<bound_args, tag::allocator>::type
       , boost::parameter::binding<bound_args, tag::allocator>
@@ -52,6 +64,12 @@ struct extract_allocator
 template <typename bound_args, bool default_ = false>
 struct extract_fixed_sized
 {
+private:
+    typedef typename boost::mpl::has_key<bound_args, tag::fixed_sized>::type _has_fixed_sized;
+
+public:
+    static const bool has_fixed_sized = _has_fixed_sized::value;
+
     typedef typename mpl::eval_if<
         typename boost::mpl::has_key<bound_args, tag::fixed_sized>::type
       , boost::parameter::binding<bound_args, tag::fixed_sized>
